@@ -12,12 +12,17 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev
 
-# Copy frontend and build it
+# Copy frontend dependencies
 COPY frontend/package*.json frontend/
-RUN cd frontend && npm ci && VITE_API_URL=/api npm run build
+RUN cd frontend && npm ci
 
-# Copy rest of source
+# Copy all source code
 COPY . .
+
+# Build frontend (source files now available)
+RUN cd frontend && VITE_API_URL=/api npm run build
+
+# Clean up frontend dev artifacts
 RUN rm -rf frontend/node_modules frontend/src frontend/public
 
 EXPOSE 8080

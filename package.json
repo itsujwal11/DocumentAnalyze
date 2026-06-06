@@ -1,0 +1,26 @@
+{
+  "name": "photext-pro",
+  "version": "1.0.0",
+  "description": "A production-ready, full-stack web application that extracts structured information from image-based text using OCR and rule-based parsing.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "cd frontend && npm run build",
+    "dev:server": "node server.js",
+    "dev:client": "cd frontend && npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "adm-zip": "^0.5.17",
+    "cors": "^2.8.6",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "jimp": "^1.6.1",
+    "multer": "^2.1.1",
+    "pdf-parse": "^2.4.5"
+  }
+}

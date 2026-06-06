@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: cleardocs
+    env: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TESS_PATH
+        value: tesseract
+      - key: PDFTOPPM_PATH
+        value: pdftoppm
+      - key: PORT
+        value: 8080

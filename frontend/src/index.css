@@ -1,0 +1,81 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-2.5 px-6 rounded-xl transition-all duration-200 shadow-soft hover:shadow-medium hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-gray-700 font-medium py-2.5 px-6 rounded-xl border border-gray-200 transition-all duration-200 shadow-soft hover:shadow-medium hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+  .btn-ghost {
+    @apply hover:bg-gray-100 text-gray-600 font-medium py-2 px-4 rounded-lg transition-all duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl shadow-soft border border-gray-100;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+  }
+  
+  .sidebar-section {
+    @apply bg-white rounded-2xl shadow-soft border border-gray-100 p-6;
+  }
+  
+  .text-bounding-box {
+    @apply border-2 border-primary-500 bg-primary-100/30 transition-all duration-200;
+  }
+  
+  .text-bounding-box:hover {
+    @apply border-primary-600 bg-primary-100/50 shadow-medium;
+  }
+  
+  .text-bounding-box.selected {
+    @apply border-primary-700 bg-primary-100/60 shadow-strong;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .backdrop-blur-xs {
+    backdrop-filter: blur(2px);
+  }
+}

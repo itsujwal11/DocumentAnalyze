@@ -41,7 +41,7 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok', uptime: process.up
 if (process.env.NODE_ENV === 'production') {
   const frontendDist = path.join(__dirname, 'frontend', 'dist');
   app.use(express.static(frontendDist));
-  app.get('*', (req, res, next) => {
+app.get('/{*path}', (req, res, next) => {
     if (req.path.startsWith('/api')) return next();
     res.sendFile(path.join(frontendDist, 'index.html'));
   });

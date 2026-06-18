@@ -30,84 +30,8 @@ DocumentAnalyze is a production-ready, full-stack web application that extracts 
 ---
 
 ## Architecture / Pipeline
+User Upload (image / PDF / txt / ZIP) │ ▼ ┌─────────────────┐ │ OCR Engine │ Tesseract 5 + Jimp preprocessing (images) │ (server/ocr) │ pdf-parse + pdftoppm fallback (PDFs) └────────┬────────┘ │ ▼ ┌─────────────────┐ │ Text Cleanup │ Normalize, fix broken numbers, OCR char swaps, │ (server/ocr/ │ merge split lines, remove control characters │ cleanup.js) │ └────────┬────────┘ │ ▼ ┌─────────────────┐ │ Classification │ Keyword scoring (required +30, strong +15, │ (server/ │ medium +5) → best match with confidence │ classify.js) │ └────────┬────────┘ │ ▼ ┌─────────────────┐ │ Parsing │ 11 specialized rule-based parsers extracting │ (server/parsers) │ header fields, line items, totals, tables └────────┬────────┘ │ ▼ ┌─────────────────┐ │ Entity Extract │ Regex extraction: emails, phones, dates, │ (server/ │ amounts, account numbers, IBAN, BIC, IDs │ entity.js) │ └────────┬────────┘ │ ▼ ┌─────────────────┐ │ Validation & │ Confidence scoring, field validation, │ Normalization │ unified output structure │ (server/ │ │ validate.js, │ │ normalize.js) │ └────────┬────────┘ │ ▼ ┌─────────────────┐ │ Export │ Excel (.xlsx) multi-sheet workbooks │ (server/export) │ CSV (.csv) with UTF-8 BOM └─────────────────┘
 
-┌──────────────────────────────────────────────────────────────┐
-│                      📥 User Upload                          │
-│        (Image / PDF / TXT / ZIP files)                      │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│                      🔍 OCR Engine                           │
-│   • Images → Tesseract 5 + Jimp preprocessing               │
-│   • PDFs   → pdf-parse + pdftoppm fallback                  │
-│   (server/ocr)                                              │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│                    🧹 Text Cleanup Layer                     │
-│   • Normalize text structure                                │
-│   • Fix OCR errors (numbers, symbols, spacing)              │
-│   • Merge broken lines                                      │
-│   • Remove control characters                               │
-│   (server/ocr/cleanup.js)                                   │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│                🧠 Document Classification                    │
-│   • Keyword scoring system                                  │
-│     - Required match   → +30                                │
-│     - Strong match     → +15                                │
-│     - Medium match     → +5                                 │
-│   • Select best-fit document type + confidence score        │
-│   (server/classify.js)                                      │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│                    🧾 Structured Parsing                    │
-│   • 11 rule-based parsers                                  │
-│   • Extract:                                                │
-│     - Header fields                                         │
-│     - Line items                                            │
-│     - Totals & summaries                                   │
-│     - Tabular data                                         │
-│   (server/parsers/)                                        │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│               🔎 Entity Extraction Engine                   │
-│   • Regex-based extraction                                 │
-│   • Detect:                                                │
-│     - Emails                                               │
-│     - Phone numbers                                        │
-│     - Dates                                                │
-│     - Currency / amounts                                   │
-│     - Account / IBAN / BIC                                 │
-│     - IDs                                                  │
-│   (server/entity.js)                                       │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│           ✅ Validation & Normalization Layer                │
-│   • Field validation rules                                 │
-│   • Confidence scoring                                     │
-│   • Standardized output schema                             │
-│   • Data normalization                                     │
-│   (server/validate.js, normalize.js)                       │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│                        📤 Export Layer                      │
-│   • Excel (.xlsx) → multi-sheet structured workbook        │
-│   • CSV (.csv) → UTF-8 BOM support                         │
-│   (server/export/)                                         │
-└──────────────────────────────────────────────────────────────┘
 
 ---
 
@@ -338,9 +262,12 @@ Export — Download results as a formatted Excel workbook (multi-sheet) or CSV f
 License
 This project is licensed under the ISC License.
 
-Acknowledgments :
+Acknowledgments
 Tesseract OCR — Open-source OCR engine
 Poppler — PDF rendering library
 ExcelJS — Spreadsheet generation
 Render — Cloud hosting
 
+---
+
+That's everything — just create a new file named `README.md` in the root of the repo and paste it in. Then commit and push!

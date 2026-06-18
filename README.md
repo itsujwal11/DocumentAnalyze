@@ -1,4 +1,4 @@
-# DocumentAnalyze — AI-Powered OCR Document Intelligence
+# DocumentAnalyze - AI OCR Document Intelligence
 
 [![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=node.js&logoColor=white)](https://nodejs.org)
 [![Express](https://img.shields.io/badge/Express-5-000000?logo=express&logoColor=white)](https://expressjs.com)
